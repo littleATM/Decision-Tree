@@ -1,0 +1,40 @@
+决策树构建规则及使用方法
+一.xml各节点构成
+    1.决策树中的根节点表达方式为<root></root> 其中tag必须为root
+    2.决策树中其他节点的表达方式为<node></node> 其中tag必须为node
+    3.决策树中转移条件的表达方式为<cond>conditon</cond> 其中tag为自定义相应字符串，表达式用||相连接
+      例子：<speed>(,1)||2||[3,4]||(5,6)||[7.4,8.6)||[9,)</speed>
+    4.决策树中节点名称表达方式为<name></name> 其中tag必须为name
+二.决策树的xml表示
+    1.叶节点必须有名称，其他节点无要求
+    2.子节点需要包含在父节点里面 
+      例子:<node>
+            <name>parent</name>
+            <node>
+                <name>child</name>
+            </node>
+        </node>
+   3.每个子节点的转移条件包含在子节点中,且为与的关系,转移条件的tag(特殊tag如and，or除外)不可重复
+     例子:<node>
+            <name>myNode</name>
+            <speed>1||2||[3.2,4.3]</speed>
+            <height>8000||2000||(3000,4000)||(5000,)</height>
+        </node>
+    4.复杂表达式的构成
+      <or></or>
+      和
+      <and></and>
+      其中<or></or>中的表达式关系为"或",<and></and>中的表达式关系为"与"
+      例子:<and>
+            <speed>1000</speed>
+            <height>5000</height>
+          <and>
+          相当于speed == 1000 && height == 5000
+          <or>
+            <speed>1000</speed>
+            <height>5000</height>
+          </or>
+          相当于speed == 1000 || height == 5000
+      复杂表达式可以嵌套，从而形成更复杂的表达式
+    5.返回值
+      若存在叶节点可达到，则返回叶节点的名称,否则返回not in this tree 若树是完备的，则一定会返回叶节点

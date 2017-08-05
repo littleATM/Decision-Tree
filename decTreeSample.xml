@@ -1,0 +1,28 @@
+<root>
+    <node>
+        <name>node1</name>
+        <speed>(,0.5)||[1,2)||[5,6]||[8,8]||(100,)</speed>
+        <or>
+            <height>[1000,1000]</height>
+            <enemy>[,2]</enemy>
+            <and>
+                <mach>(100,200)</mach>
+                <sideslip>(700,900)</sideslip>
+            </and>
+        </or>
+        <node>
+            <name>attack</name>
+        </node>
+    </node>
+    <node>
+        <name>node2</name>
+        <speed>(,0.5)||(1,2)||[5,6]||[8,8]||(100,)</speed>
+        <and>
+            <height>[400,1000]</height>
+            <enemy>(2,]</enemy>
+        </and>
+        <node>
+            <name>retreat</name>
+        </node>
+    </node>
+</root>
